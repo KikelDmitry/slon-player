@@ -1,0 +1,68 @@
+@use 'sass:color';
+
+// desktop first
+@mixin lessThan($size) {
+  @media (max-width: #{$size + px}) {
+    @content;
+  }
+}
+
+// mobile first
+@mixin moreThan($size) {
+  @media (min-width: #{$size + px}) {
+    @content;
+  }
+}
+
+// hover only
+@mixin media-hover {
+  @media (hover: hover) {
+    @content;
+  }
+}
+
+// touch only
+@mixin media-touch {
+  @media (hover: none) {
+    @content;
+  }
+}
+
+// landscape orientation
+@mixin media-landscape {
+  @media (aspect-ratio >= 1/1) {
+    @content;
+  }
+}
+
+// portarait orientation
+@mixin media-portrait {
+  @media (aspect-ratio <= 1/1) {
+    @content;
+  }
+}
+
+// octagon
+@mixin clip-octagon($n) {
+  clip-path: polygon(
+    0 $n,
+    $n 0,
+    calc(100% - $n) 0,
+    100% $n,
+    100% calc(100% - $n),
+    calc(100% - $n) 100%,
+    $n 100%,
+    0 calc(100% - $n)
+  );
+}
+
+@mixin button-butt($color) {
+  background-color: $color;
+  background-image: linear-gradient(
+    135deg,
+    color.adjust($color, $lightness: 50%),
+    color.adjust($color, $lightness: -50%)
+  );
+  position: relative;
+  filter: drop-shadow(1px 1px 1px #000);
+}
